@@ -26,10 +26,6 @@ while len(guessed_states) < 50:
         t.goto(state_data.x.item(), state_data.y.item())  # best practice is  to use item() at the end but this is my way of solving the error
         t.write(guess)  # you can also get this by using state_data.state.item() , but this is my style
 
-remaining_states = []
-
-for state in all_states:
-    if state not in guessed_states:
-        remaining_states.append(state)
+remaining_states = [state for state in all_states if state not in guessed_states]
 db_states = pandas.DataFrame(remaining_states)
 db_states.to_csv("remaining_states.csv")
